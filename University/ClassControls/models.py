@@ -1,3 +1,4 @@
+from random import choices
 from django.db import models
 from django.urls import reverse
 from django.core.validators import MaxValueValidator, MinValueValidator
@@ -50,13 +51,33 @@ class Levels(models.Model):
 
     def __str__(self):
         return '%s' % (self.LevelName)
+
+
     
-class Evaluations(models.Model):
+class Planning_control_classes(models.Model):
     
-    Evaluation= models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(100)], verbose_name='Evaluation', help_text='Add an evaluation')
+    Category = models.ForeignKey("Categories", verbose_name="Category", help_text="Select a category", on_delete=models.CASCADE, blank=False, null=False)
+    
+    Responsible = models.ForeignKey("Responsibles", verbose_name="Responsible", help_text="Select a responsible", on_delete=models.CASCADE, blank=False, null=False)
+    
+    
+    ClassType = models.ForeignKey("ClassTypes", verbose_name="Class Type", help_text="Select a class type", on_delete=models.CASCADE, blank=False, null=False)
+    
+    Career = models.ForeignKey("Careers", verbose_name="Career", help_text="Select a career", on_delete=models.CASCADE, blank=False, null=False)
+    
+    Level = models.ForeignKey("Levels", verbose_name="Level", help_text="Select a level", on_delete=models.CASCADE, blank=False, null=False)
+    
+    ClassRoom = models.CharField(max_length=100, verbose_name="Classroom", help_text="Typoe a classroom", blank= False, null=False)
+    
+    Evaluation = models.IntegerField(verbose_name="Evaluation", help_text="choose an evaluation", null= True, choices=[(2,'2'), (3,'3'), (4,'4'), (5,'5')])
+    
+    RealizationDate = models.DateField(verbose_name="Realization Date", help_text="Select a date of realization", null=True)
+    
+    Observations= models.TextField(verbose_name="Observations", help_text="Type any observation here")
     
     def get_absolute_url(self):
-        return reverse('evaluations', args=[str(self.id)])
+        return reverse('planningClassControl', args=[str(self.id)])
 
     def __str__(self):
-        return '%s' % (self.Evaluation)
+        return '%s, %s, %s, %s, %s, %s' % (self.Responsible, self.Category,self.ClassType, self.Career, self.Level, self.ClassRoom)
+  
