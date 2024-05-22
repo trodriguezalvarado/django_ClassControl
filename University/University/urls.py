@@ -23,16 +23,22 @@ from django.conf.urls.static import static
 
 
 urlpatterns = [
+    path('ClassControls/', include('ClassControls.urls')),
+]
+urlpatterns += [
     path('admin/', admin.site.urls),
 ]
 
-urlpatterns += [
-    path('ClassControls/', include('ClassControls.urls')),
-]
+
 
 urlpatterns += [
     path('', RedirectView.as_view(url='/ClassControls/', permanent=True)),
 ]
 
+urlpatterns += [
+    path('accounts/', include('django.contrib.auth.urls')),
+]
+
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
 
