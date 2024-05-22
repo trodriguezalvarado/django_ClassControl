@@ -1,0 +1,22 @@
+{% extends "shared/default_layout.html" %}
+
+{% block content %}
+    <h1>Planning List</h1>
+
+    {% if planning_list %}
+    <ul>
+
+    {% for planing in planning_list %}
+    <li>
+        <a href="{{ planning.get_absolute_url }}">{{ planning }}</a> 
+    </li>
+    {% endfor %}
+
+    </ul>
+    {% else %}
+    <p class="text-center mt-5">There isn't any class control planning yet.</p>
+    {% endif %}
+    <div class="d-flex justify-content-end m-3 mt-5">
+        <a class="btn btn-primary mr-5" href="/" role="button">Home</a>
+    </div>
+{% endblock %}
