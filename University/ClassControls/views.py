@@ -27,5 +27,12 @@ class PlanningDetailView(generic.DetailView):
     model = Planning_control_classes
     template_name = "planning/planningDetail.html"
     context_object_name = 'planning_Data'
+    
+@method_decorator(login_required, name='dispatch')
+@method_decorator(group_required('responsibles',), name='dispatch')
+class PlanningAddView(generic.CreateView):
+    model = Planning_control_classes
+    fields = ['Category', 'Responsible', 'ClassType', 'Career', 'Level', 'ClassRoom']
+    template_name = "planning/planningAdd.html"
 
 # Planning Views end
