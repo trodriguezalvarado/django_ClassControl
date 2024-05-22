@@ -259,4 +259,4 @@ class PlanningControlClassesModelTest(TestCase):
         
     def test_PlanningControlClasses_absolute_url(self):
         planningControlClasses = Levels.objects.get(id=1)
-        self.assertEqual(planningControlClasses.get_absolute_url, '/ControlClass/planningClassControl/1')
+        self.assertEqual(planningControlClasses.get_absolute_url, '/ControlClass/planning/1')
